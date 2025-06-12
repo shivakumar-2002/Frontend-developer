@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HOSPITAL </title>
+</head>
+<style>
+    * {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background-color: rgb(122, 193, 255);
+  font-size: 30px;
+}
+.title {
+  font-size: 50px;
+  text-transform: uppercase;
+  margin-left: 100px;
+  color: white;
+  letter-spacing: 5px;
+}
+.bmi-form {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  max-width: 30vw;
+  margin: 100px;
+}
+.bmi-form input {
+  padding: 15px;
+  border: none;
+}
+
+.bmi-button {
+  padding: 10px;
+  border: none;
+  background-color: black;
+  color: white;
+  cursor: pointer;
+}
+.red {
+  background-color: rgb(255, 99, 99);
+}
+
+.header-container {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+</style>
+<body>
+    <h1 class="title"> Hospital</h1>
+    <div class="header-container">
+      <form class="bmi-form">
+        <input type="text" required placeholder="Enter your name" id="name" />
+        <input
+          type="number"
+          placeholder="Enter your weight (kg)"
+          id="weight"
+          required
+        />
+        <input
+        type="number"
+        placeholder="Enter your height (cm)"
+        id="height"
+        required
+      />
+      <button class="bmi-button" id="bmi-calculate">Calculate</button>
+      <button class="bmi-button red" id="reset">Reset</button>
+      <p id="result"></p>
+    </form>
+    <img src="https://4.bp.blogspot.com/-Uq6g9i1BO4U/VdXOiM35C8I/AAAAAAAAAPQ/e1MBDE-bzlw/s1600/AR-04-00833%2B-%2BCopy%2B21-05%2Bweb.jpg"  height="300px" width="400px"/>
+  </div>
+  <script> 
+  let bmiForm = document.querySelector(".bmi-form");
+bmiForm.addEventListener("submit", function (e) {
+  //To prevent the default behavior of the form submission
+  e.preventDefault();
+  // e.target refers to the form element
+  const form = e.target;
+
+  // Access individual form elements using e.target
+  const name = form.querySelector("#name").value;
+  const weight = +form.querySelector("#weight").value;
+  const height = +form.querySelector("#height").value;
+
+  console.log(name, weight,height);
+  //Write your logic here.
+  //Logic begins
+let heightInmeters =height/100;
+let bmi= Number((weight / heightInmeters ** 2). toFixed(2));
+console.log("bmi",bmi);
+let result;
+if (bmi <18.5){
+    console.log("Thin");
+    result="Thin";
+} else if (bmi >25){
+    console.log("Fat");
+    result="Fat";
+}else {
+    console.log("Normal")
+    result="Normal";
+}
+
+  //Logic ends
+
+  //Uncomment below code after writing your logic
+   form.querySelector("#result").textContent = `${name}, You are ${result}`;
+});
+
+//Below code is reset the form - will explain later
+document.querySelector("#reset").addEventListener("click", function (e) {
+  bmiForm.querySelector("#name").value = "";
+  bmiForm.querySelector("#weight").value = "";
+  bmiForm.querySelector("#height").value = "";
+  bmiForm.querySelector("#result").textContent = "";
+});
+  </script>
+</body>
+</html>
